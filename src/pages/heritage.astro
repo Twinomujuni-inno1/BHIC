@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-astro-page="heritage">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11110f">
+<meta name="description" content="Explore Bugungu heritage through people, objects, performance, place and community knowledge.">
+<title>Bugungu Heritage | BHIC</title>
+<style>
+@font-face { font-family: "BHIC Montserrat"; src: url(/assets/06b16db7a969135d.woff2) format("woff2"); font-style: normal; font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "BHIC Lora"; src: url(/assets/ddb8c66035104e23.woff2) format("woff2"); font-style: normal; font-weight: 400 700; font-display: swap; }
+:root{--ink:#11110f;--paper:#fff;--warm:#f4efe6;--ochre:#d9780d;--teal:#285f63;--line:#d9d4ca;--head:"Montserrat",Arial,sans-serif;--body:"Lora",Georgia,serif;--header:70px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:var(--body);font-size:17px;line-height:1.62}img{display:block;max-width:100%}a{color:inherit}button,a{-webkit-tap-highlight-color:transparent}.skip{position:fixed;left:12px;top:-60px;z-index:1000;background:#fff;padding:10px 14px;border-radius:4px;font-family:var(--head);font-weight:700}.skip:focus{top:10px}
+.site-header{height:var(--header);padding:8px 20px 10px;display:flex;align-items:center;justify-content:space-between;position:absolute;inset:0 0 auto 0;z-index:80;background:linear-gradient(to bottom,rgba(0,0,0,.62),transparent);border:0}.brand img{width:150px;height:auto;filter:invert(1)}.menu-button{width:48px;height:48px;border:0;background:transparent;display:grid;place-items:center;padding:9px;cursor:pointer}.menu-button span,.menu-button:before,.menu-button:after{content:"";display:block;width:29px;height:2px;background:#fff;margin:4px 0;transition:.25s}.menu-button[aria-expanded="true"] span{opacity:0}.menu-button[aria-expanded="true"]:before{transform:translateY(6px) rotate(45deg)}.menu-button[aria-expanded="true"]:after{transform:translateY(-6px) rotate(-45deg)}.drawer{position:fixed;inset:var(--header) 0 auto 0;background:#fff;z-index:70;padding:22px 24px 30px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.28s ease;box-shadow:0 18px 30px rgba(0,0,0,.14)}.drawer.open{transform:none}.drawer nav{display:grid}.drawer a{font-family:var(--head);font-size:1.16rem;font-weight:700;text-decoration:none;padding:15px 0;border-bottom:1px solid var(--line)}.drawer .support{margin-top:18px;border:0;background:var(--ochre);color:#111;text-align:center;border-radius:3px}.scrim{position:fixed;inset:var(--header) 0 0;background:rgba(0,0,0,.45);z-index:60;opacity:0;pointer-events:none;transition:.25s}.scrim.open{opacity:1;pointer-events:auto}
+.album-shell{height:100svh;background:#000;position:relative}.album-top{position:absolute;z-index:8;left:18px;right:18px;top:calc(var(--header) + 6px);display:flex;align-items:center;justify-content:space-between;color:#fff;font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-shadow:0 1px 9px #000}.album-top a{padding:8px 0;text-underline-offset:4px}.album-counter{font-variant-numeric:tabular-nums}.album-progress{position:absolute;z-index:8;left:18px;right:18px;top:calc(var(--header) + 43px);height:2px;background:rgba(255,255,255,.28)}.album-progress span{display:block;width:10%;height:100%;background:var(--ochre);transition:width .25s}.album{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior-y:contain;scrollbar-width:none}.album::-webkit-scrollbar{display:none}.album-slide{height:100%;position:relative;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;background:#111}.album-slide img{width:100%;height:100%;object-fit:cover}.album-slide:nth-child(1) img{object-position:58% center}.album-slide:nth-child(2) img{object-position:47% center}.album-slide:nth-child(3) img{object-position:center}.album-slide:nth-child(4) img{object-position:50% center}.album-slide:nth-child(6) img{object-position:center 52%}.album-slide:nth-child(8) img{object-position:64% center}.album-slide:nth-child(9) img{object-position:48% center}.album-slide:nth-child(10) img{object-position:center}.album-slide__shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,transparent 29%,transparent 47%,rgba(0,0,0,.86) 100%)}.album-slide__copy{position:absolute;z-index:3;left:22px;right:22px;bottom:max(36px,env(safe-area-inset-bottom));color:#fff;max-width:580px}.album-slide__eyebrow{margin:0 0 9px!important;font-family:var(--head)!important;text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:.72rem!important;color:#f6a43f}.album-slide h2{font-family:var(--head);font-size:clamp(1.7rem,8vw,3rem);line-height:1.03;letter-spacing:-.04em;margin:0 0 12px;max-width:13ch}.album-slide__copy>p:last-child{font-family:var(--body);font-size:1rem;line-height:1.48;margin:0;max-width:36ch}.swipe-hint{position:absolute;z-index:4;right:22px;bottom:38px;color:#fff;font-family:var(--head);font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;margin:0;writing-mode:vertical-rl}.swipe-hint span{color:#f6a43f;font-size:1rem}.album-continue{display:inline-block;margin-top:18px;font-family:var(--head);font-weight:700;color:#fff;text-underline-offset:5px}.album-slide:last-child .album-slide__copy{bottom:max(64px,env(safe-area-inset-bottom))}
+.story{padding:76px 22px 82px}.story .kicker,.section-kicker{font-family:var(--head);font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:#a95700;font-weight:700;margin:0 0 15px}.story h1,.section-title{font-family:var(--head);font-size:clamp(2.2rem,11vw,4.7rem);line-height:.98;letter-spacing:-.055em;margin:0 0 24px;max-width:12ch}.story .lead{font-size:1.22rem;line-height:1.52;max-width:34ch;margin:0}.heritage-pillars{background:var(--warm);padding:64px 22px}.pillar{padding:30px 0;border-top:1px solid #c9c0b1}.pillar:first-of-type{margin-top:26px}.pillar-number{font-family:var(--head);color:#a95700;font-size:.72rem;font-weight:700;letter-spacing:.12em}.pillar h3{font-family:var(--head);font-size:1.55rem;line-height:1.08;letter-spacing:-.035em;margin:11px 0}.pillar p{margin:0;max-width:40ch}.museum{padding:70px 22px}.object-strip{display:grid;grid-template-columns:1.15fr .85fr;grid-template-rows:160px 160px;gap:8px;margin:30px 0}.object-strip figure{margin:0;overflow:hidden;background:#ddd}.object-strip figure:first-child{grid-row:1/3}.object-strip img{width:100%;height:100%;object-fit:cover}.museum p{max-width:38ch}.actions{display:grid;gap:10px;margin-top:28px}.button{min-height:52px;display:flex;align-items:center;justify-content:center;padding:12px 18px;border:2px solid var(--ochre);background:var(--ochre);font-family:var(--head);font-weight:700;text-decoration:none;text-align:center;border-radius:3px}.button.secondary{background:transparent;color:#9b5100}.contribute{background:var(--ink);color:#fff;padding:68px 22px}.contribute .section-kicker{color:#f6a43f}.contribute .section-title{font-size:clamp(2.1rem,10vw,4.3rem)}.contribute p{color:#d8d5ce;max-width:38ch}.contribute .button{color:#111;margin-top:28px}.footer{background:#0f0f0d;color:#fff;padding:58px 22px 34px}.footer img{width:180px;margin-bottom:18px;filter:invert(1)}.footer__descriptor{font-family:var(--head);font-size:.64rem;text-transform:uppercase;letter-spacing:.19em;margin:0 0 38px}.footer nav{display:grid}.footer nav a{font-family:var(--head);font-weight:600;text-decoration:none;padding:13px 0;border-top:1px solid #2b2b28}.footer__bottom{display:flex;justify-content:space-between;gap:16px;border-top:1px solid #2b2b28;margin-top:34px;padding-top:18px;color:#aaa;font-family:var(--head);font-size:.68rem}
+@media(min-width:760px){:root{--header:84px}.site-header{padding-inline:42px}.brand img{width:190px}.drawer{left:auto;width:430px;top:var(--header);height:calc(100vh - var(--header));padding:32px}.album-slide__copy{left:7vw;bottom:7vh}.album-top,.album-progress{left:4vw;right:4vw}.story,.heritage-pillars,.museum,.contribute{padding-left:8vw;padding-right:8vw}.heritage-pillars{display:grid;grid-template-columns:.85fr 1.15fr;gap:8vw}.heritage-pillars .pillars{padding-top:0}.pillar:first-of-type{margin-top:0}.museum{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:center}.object-strip{order:2;height:470px;grid-template-rows:1fr 1fr}.actions{grid-template-columns:1fr 1fr;max-width:520px}.footer{padding-inline:8vw}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer,.album-progress span{transition:none}}
+
+.album-slide:nth-child(2) .album-slide__copy{top:calc(var(--header) + 96px);bottom:auto}
+.album-slide:nth-child(3) .album-slide__copy{background:rgba(17,17,15,.78);padding:18px;border-left:3px solid var(--ochre)}
+.album-slide:nth-child(4) .album-slide__eyebrow{color:#fff;background:var(--ochre);display:inline-block;padding:5px 8px;letter-spacing:.08em}
+.album-slide:nth-child(6) h2{font-size:clamp(2.15rem,11vw,4rem);max-width:10ch}
+.album-slide:nth-child(8) .album-slide__copy{text-align:right;margin-left:auto}.album-slide:nth-child(8) h2{margin-left:auto}
+.album-slide:nth-child(10) .album-slide__copy{text-align:center;max-width:620px;margin-inline:auto}.album-slide:nth-child(10) h2{margin-inline:auto}
+.object-focus{background:var(--warm)}.object-focus__image{height:72svh;position:relative;background:#171714}.object-focus__image img{width:100%;height:100%;object-fit:cover}.object-focus__image span{position:absolute;left:20px;top:20px;background:var(--ochre);padding:7px 10px;font-family:var(--head);font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em}.object-focus__copy{padding:60px 22px 72px}.object-focus__copy p{max-width:40ch}.record-note{border-top:1px solid #c7bdaf;padding-top:18px;margin-top:26px;font-size:.87rem;color:#5b574f}.visit-direct{padding:72px 22px;background:#fff}.visit-direct>p{max-width:38ch}
+@media(min-width:760px){.object-focus{display:grid;grid-template-columns:1.08fr .92fr;min-height:100vh}.object-focus__image{height:100%}.object-focus__copy{padding:10vw 7vw;align-self:center}.visit-direct{padding:8vw}.visit-direct .section-title{max-width:14ch}}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#story">Skip photo album</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="BHIC home"><img src="/assets/7732233b3dc43e88.png" alt="Bugungu"></a>
+  <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open navigation"><span></span></button>
+</header>
+<div class="scrim" data-close></div>
+<aside class="drawer" id="site-menu" aria-hidden="true"><nav aria-label="Main navigation">
+  <a href="/">Home</a><a href="/heritage/">Heritage</a><a href="/about/">About BHIC</a><a href="/#work">Our work</a><a href="/visit/">Visit</a><a href="/contact/">Contact</a><a class="support" href="/support/">Support BHIC</a>
+</nav></aside>
+<main>
+  <section class="album-shell" aria-label="Ten photographs exploring Bugungu heritage">
+    <div class="album-top"><span>Bugungu heritage</span><a href="#story">Skip to the story</a><span class="album-counter" aria-live="polite">01 / 10</span></div>
+    <div class="album-progress" aria-hidden="true"><span></span></div>
+    <div class="album" tabindex="0">
+  <article class="album-slide" data-slide="1">
+    <img src="/assets/a3aad42eb4de2607.webp" alt="Hands playing a traditional string instrument" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Hands · music · memory</p>
+      <h2>The player’s hands are part of the instrument.</h2>
+      <p>Tension, touch and repeated practice turn strings and wood into music. The skill cannot be separated from the person playing.</p>
+    </div>
+    <p class="swipe-hint" aria-hidden="true">Swipe up <span>↓</span></p>
+    
+  </article>
+  <article class="album-slide" data-slide="2">
+    <img src="/assets/fae6aa2cce7de75f.webp" alt="Bugungu Heritage Troupe members gathered with traditional drums" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Performance · community</p>
+      <h2>Bugungu Heritage Troupe</h2>
+      <p>The troupe carries cultural knowledge through collective song, rhythm and performance.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="3">
+    <img src="/assets/1f69baf799a27ca3.webp" alt="BHIC staff and community members sharing knowledge under a tree" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">People · conversation</p>
+      <h2>Documentation begins face to face.</h2>
+      <p>BHIC staff and community members sit together in Buliisa to exchange knowledge before it becomes a record.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="4">
+    <img src="/assets/cf4380054b7becca.webp" alt="Kiiza Wilson explaining a suspended woven basket to a museum visitor" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Kiiza Wilson · interpretation</p>
+      <h2>Kiiza Wilson connects objects to lived memory.</h2>
+      <p>Here, Kiiza interprets a suspended woven basket with a museum visitor.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="5">
+    <img src="/assets/a466b7d6fea95847.webp" alt="Objects displayed inside the Bugungu Heritage and Information Centre" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Inside BHIC · Buliisa</p>
+      <h2>Inside the BHIC museum, Buliisa.</h2>
+      <p>The room brings tools, vessels, instruments, books and community records into one local place.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="6">
+    <img src="/assets/eb921072c8e4ae7b.webp" alt="A tall hand-built fishing trap from the BHIC collection" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Water · materials · skill</p>
+      <h2>This fishing trap was built by hand.</h2>
+      <p>Its structure records practical decisions about material, strength, water and use—even before its full story is documented.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="7">
+    <img src="/assets/16f3584d97e98f6d.webp" alt="A hide-covered drum from the BHIC collection" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Rhythm · gathering</p>
+      <h2>Look at how this drum is held together.</h2>
+      <p>Hide is stretched across a wooden body and secured with lacing. Its cultural meaning depends on when, why and how it is played.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="8">
+    <img src="/assets/595d33eedecba05b.webp" alt="A visitor studying the Mpeehu za Bugungu community map" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Place · wind · direction</p>
+      <h2>Mpeehu za Bugungu maps community knowledge.</h2>
+      <p>The map records winds, direction and relationships to place as understood within Bugungu.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="9">
+    <img src="/assets/5ac99fbb0ccd167c.webp" alt="A visitor smiling while reading a notebook in the BHIC library" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">Library · documentation</p>
+      <h2>BHIC is also a library and information centre.</h2>
+      <p>Its books and community records give learners and researchers somewhere local to begin.</p>
+    </div>
+    
+    
+  </article>
+  <article class="album-slide" data-slide="10">
+    <img src="/assets/e2ab0b827cc2061a.webp" alt="Kiiza Wilson and colleagues standing together against a stone wall" draggable="false">
+    <div class="album-slide__shade"></div>
+    <div class="album-slide__copy">
+      <p class="album-slide__eyebrow">People · responsibility · future</p>
+      <h2>The work has faces.</h2>
+      <p>Kiiza Wilson and colleagues are among the people recording, teaching and caring for Bugungu’s heritage today.</p>
+    </div>
+    
+    <a class="album-continue" href="#story">Continue to the story ↓</a>
+  </article></div>
+  </section>
+
+
+  <section class="story" id="story">
+    <p class="kicker">What you have just seen</p>
+    <h1>Heritage is not something Bugungu left behind.</h1>
+    <p class="lead">It is carried in skilled hands, collective memory, objects, language and place. BHIC exists to keep those connections visible, useful and locally held.</p>
+  </section>
+
+  <section class="object-focus" id="museum">
+    <div class="object-focus__image"><img src="/assets/eb921072c8e4ae7b.webp" alt="A tall hand-built fishing trap from the BHIC collection" loading="lazy"><span>Object in focus</span></div>
+    <div class="object-focus__copy">
+      <p class="section-kicker">One object. More than one kind of knowledge.</p>
+      <h2 class="section-title">A fishing trap begins with material—and opens into memory.</h2>
+      <p>Its form can tell us about making, strength, water and use. Its fuller meaning depends on the people who know its local name, who made it, where it was used and what knowledge governed its construction.</p>
+      <p class="record-note">BHIC is continuing to document this object with community knowledge holders. No unconfirmed local name or maker has been assigned here.</p>
+    </div>
+  </section>
+
+  <section class="visit-direct" id="visit">
+    <p class="section-kicker">Visit BHIC · Buliisa, Uganda</p>
+    <h2 class="section-title">Some stories need to be heard in the room.</h2>
+    <p>Call or email the team before travelling so BHIC can help you arrange a meaningful visit.</p>
+    <div class="actions"><a class="button" href="tel:+256392585818">Call BHIC</a><a class="button secondary" href="mailto:bugunguheritage@gmail.com?subject=Planning%20a%20visit%20to%20BHIC">Email to plan a visit</a></div>
+  </section>
+
+  <section class="contribute">
+    <p class="section-kicker">Community knowledge</p>
+    <h2 class="section-title">Do you recognise something here?</h2>
+    <p>Your name, memory, correction or story can make the record more accurate—and help decide what should or should not be shared publicly.</p>
+    <a class="button" href="mailto:bugunguheritage@gmail.com?subject=Knowledge%20about%20Bugungu%20heritage">Share what you know</a>
+  </section>
+</main>
+<footer class="footer"><img src="/assets/7732233b3dc43e88.png" alt="Bugungu"><p class="footer__descriptor">Heritage and Information Centre</p><nav aria-label="Footer navigation"><a href="/">Home</a><a href="/about/">About BHIC</a><a href="/visit/">Plan a visit</a><a href="/support/">Support the work</a><a href="/contact/">Contact BHIC</a></nav><div class="footer__bottom"><span>Buliisa, Uganda</span><span>© BHIC · Privacy</span></div></footer>
+<script is:inline>
+const menu=document.querySelector('.menu-button'),drawer=document.querySelector('.drawer'),scrim=document.querySelector('.scrim');
+function closeMenu(){menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');scrim.classList.remove('open')}
+menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')==='true';if(open){closeMenu()}else{menu.setAttribute('aria-expanded','true');menu.setAttribute('aria-label','Close navigation');drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');scrim.classList.add('open')}});scrim.addEventListener('click',closeMenu);drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+const album=document.querySelector('.album'),slides=[...document.querySelectorAll('.album-slide')],counter=document.querySelector('.album-counter'),bar=document.querySelector('.album-progress span');let active=0;
+const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting&&entry.intersectionRatio>.6){active=slides.indexOf(entry.target);counter.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');bar.style.width=((active+1)/slides.length*100)+'%'}}},{root:album,threshold:[.6]});slides.forEach(s=>observer.observe(s));
+document.querySelectorAll('a[href="#story"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.querySelector('#story').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}));
+</script>
+</body>
+</html>

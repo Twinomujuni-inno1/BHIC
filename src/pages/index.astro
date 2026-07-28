@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en" data-astro-page="index">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11110f">
+  <meta name="description" content="Bugungu Heritage and Information Centre — keeping Bugungu heritage in community hands.">
+  <title>Bugungu Heritage and Information Centre</title>
+  <style>
+    @font-face { font-family: "BHIC Montserrat"; src: url(/assets/06b16db7a969135d.woff2) format("woff2"); font-style: normal; font-weight: 100 900; font-display: swap; }
+    @font-face { font-family: "BHIC Lora"; src: url(/assets/ddb8c66035104e23.woff2) format("woff2"); font-style: normal; font-weight: 400 700; font-display: swap; }
+    :root {
+      --ink: #11110f;
+      --white: #fff;
+      --ochre: #d9780d;
+      --ochre-dark: #b75d00;
+      --paper: #f5f1e8;
+      --lake: #315e64;
+      --mist: #e8ece8;
+      --reed: #c8b99e;
+      --line: #d8d6d0;
+      --muted: #625f59;
+      --radius: 12px;
+      --shadow: 0 10px 28px rgba(17, 17, 15, .08);
+      --gutter: clamp(18px, 5vw, 28px);
+      --font-display: "BHIC Montserrat", ui-sans-serif, system-ui, sans-serif;
+      --font-reading: "BHIC Lora", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: var(--font-reading);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.58;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { display: block; width: 100%; }
+    figure { margin: 0; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    a { color: inherit; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { margin-top: 0; font-family: var(--font-display); text-wrap: balance; }
+    h1 { margin-bottom: 16px; font-size: clamp(2.45rem, 10.5vw, 3.85rem); font-weight: 650; letter-spacing: -.04em; line-height: .98; }
+    h2 { margin-bottom: 12px; font-size: clamp(1.8rem, 7.2vw, 2.6rem); font-weight: 600; letter-spacing: -.032em; line-height: 1.04; }
+    .reason h2, #museum h2, .participation h2 { font-family: var(--font-display); font-size: clamp(2rem, 8.2vw, 3.15rem); font-weight: 550; letter-spacing: -.035em; }
+    h3 { margin-bottom: 7px; font-size: 1.18rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.12; }
+    p { margin-bottom: 16px; }
+
+    .site {
+      width: 100%;
+      min-height: 100vh;
+      margin-inline: auto;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: none;
+    }
+    .skip-link {
+      position: fixed; z-index: 1000; top: 8px; left: 8px;
+      padding: 10px 14px; color: var(--white); background: var(--ink);
+      transform: translateY(-150%); border-radius: 6px;
+    }
+    .skip-link:focus { transform: none; }
+    .section { padding: 34px var(--gutter); }
+    .section--paper { background: var(--paper); }
+    .eyebrow {
+      margin: 0 0 10px; color: var(--ochre-dark); font-size: .72rem;
+      font-family: var(--font-display); font-weight: 650; letter-spacing: .16em; line-height: 1.25; text-transform: uppercase;
+    }
+    .text-link {
+      display: inline-flex; min-height: 44px; align-items: center; gap: 8px;
+      color: var(--lake); font-family: var(--font-display); font-weight: 600; text-decoration: none;
+    }
+    .text-link:hover, .text-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+    .button {
+      display: inline-flex; min-height: 50px; align-items: center; justify-content: center;
+      padding: 12px 20px; border: 2px solid transparent; border-radius: 8px;
+      font-family: var(--font-display); font-weight: 600; text-align: center; text-decoration: none; cursor: pointer;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .button:active { transform: translateY(1px); }
+    .button--primary { color: var(--white); background: var(--ochre); }
+    .button--primary:hover, .button--primary:focus-visible { background: var(--ochre-dark); }
+    .button--outline { color: var(--ochre-dark); border-color: var(--ochre); background: var(--white); }
+    .button--outline:hover, .button--outline:focus-visible { background: #fff8ef; }
+
+    .header {
+      position: sticky; z-index: 100; top: 0;
+      display: flex; height: 72px; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter); background: rgba(255,255,255,.97);
+      border-bottom: 1px solid rgba(17,17,15,.12); backdrop-filter: blur(14px);
+    }
+    .brand { display: inline-flex; width: 145px; align-items: center; padding-block: 3px; overflow: visible; }
+    .brand img { height: auto; overflow: visible; }
+    .menu-button {
+      display: inline-grid; width: 48px; height: 48px; place-items: center; padding: 0;
+      border: 0; border-radius: 50%; color: var(--ink); background: transparent; cursor: pointer;
+    }
+    .menu-button:hover, .menu-button:focus-visible { background: var(--paper); outline: none; }
+    .hamburger, .hamburger::before, .hamburger::after {
+      display: block; width: 25px; height: 2px; background: currentColor; transition: transform .2s ease;
+    }
+    .hamburger { position: relative; }
+    .hamburger::before, .hamburger::after { content: ""; position: absolute; left: 0; }
+    .hamburger::before { top: -7px; }
+    .hamburger::after { top: 7px; }
+
+    .drawer {
+      position: fixed; z-index: 200; inset: 0 0 0 auto; width: min(88vw, 390px);
+      padding: max(24px, env(safe-area-inset-top)) 24px 32px; color: var(--white);
+      background: var(--ink); transform: translateX(102%); transition: transform .25s ease;
+      box-shadow: -18px 0 40px rgba(0,0,0,.25);
+    }
+    .drawer.is-open { transform: none; }
+    .drawer__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 38px; }
+    .drawer__logo { width: 145px; filter: invert(1); }
+    .drawer__close {
+      display: grid; width: 48px; height: 48px; place-items: center;
+      border: 1px solid #4a4a46; border-radius: 50%; color: white; background: transparent;
+      font-size: 1.7rem; cursor: pointer;
+    }
+    .drawer nav { display: grid; }
+    .drawer nav a { padding: 16px 0; border-bottom: 1px solid #363632; font-family: var(--font-display); font-size: 1.25rem; font-weight: 550; text-decoration: none; }
+    .drawer .button { width: 100%; margin-top: 28px; }
+    .scrim { position: fixed; z-index: 150; inset: 0; background: rgba(17,17,15,.55); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+    .scrim.is-open { opacity: 1; pointer-events: auto; }
+
+    .hero {
+      position: relative; isolation: isolate; display: flex; min-height: max(650px, calc(100svh - 72px));
+      align-items: flex-end; overflow: hidden; color: var(--white); background: var(--ink);
+    }
+    .hero__image { position: absolute; z-index: -2; inset: 0; overflow: hidden; background: var(--ink); }
+    .hero__image::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(17,17,15,.03) 22%, rgba(17,17,15,.16) 43%, rgba(17,17,15,.72) 69%, rgba(17,17,15,.97) 100%);
+    }
+    .hero__image img { height: 100%; object-fit: cover; object-position: center top; }
+    .hero__content { width: 100%; max-width: 40rem; padding: 38px var(--gutter) 30px; }
+    .hero .eyebrow { color: #f0a34d; text-shadow: 0 1px 16px rgba(0,0,0,.35); }
+    .hero h1 { max-width: 15ch; margin-bottom: 15px; color: var(--white); font-weight: 550; text-shadow: 0 2px 22px rgba(0,0,0,.28); }
+    .hero__content > p:not(.eyebrow) { max-width: 31rem; margin-bottom: 23px; color: #f1ede4; font-family: var(--font-reading); font-size: 1.05rem; line-height: 1.52; }
+    .hero__actions { display: flex; align-items: center; gap: 19px; flex-wrap: wrap; }
+    .hero__actions .button { min-width: 178px; }
+    .hero__secondary {
+      display: inline-flex; min-height: 48px; align-items: center; gap: 8px; color: var(--white);
+      font-family: var(--font-display); font-weight: 550; text-decoration: none;
+    }
+    .hero__secondary:hover, .hero__secondary:focus-visible { text-decoration: underline; text-underline-offset: 5px; }
+
+    .reason { display: grid; gap: 24px; padding-top: 46px; padding-bottom: 42px; background: var(--paper); }
+    .reason__intro > p:not(.eyebrow) { max-width: 31rem; font-size: 1.05rem; }
+    .reason__image { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: var(--radius); }
+    .reason__image img { height: 100%; object-fit: cover; }
+    .work-list { border-top: 1px solid #cfc8bc; }
+    .work-list article { display: grid; grid-template-columns: 38px 1fr; gap: 12px; padding: 20px 0; border-bottom: 1px solid #cfc8bc; }
+    .work-list article > span { color: var(--ochre-dark); font-family: var(--font-display); font-size: .74rem; font-weight: 650; letter-spacing: .08em; }
+    .work-list h3 { margin-bottom: 6px; }
+    .work-list p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    #museum.section { padding-top: 46px; padding-bottom: 18px; background: var(--white); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 0; }
+    .section-head h2 { margin-bottom: 0; }
+    .section-head p:not(.eyebrow) { max-width: 30rem; margin: 13px 0 0; color: var(--muted); }
+    .carousel-shell { position: relative; padding-bottom: 28px; background: var(--white); }
+    .carousel {
+      display: grid; grid-auto-columns: min(88%, 500px); grid-auto-flow: column; gap: 12px;
+      overflow-x: auto; padding: 2px var(--gutter) 10px; scroll-padding-left: var(--gutter);
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .story-card { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: 0 7px 18px rgba(17,17,15,.08); scroll-snap-align: start; }
+    .story-card__image { height: 184px; object-fit: cover; }
+    .story-card__body { position: relative; min-height: 122px; padding: 17px 62px 16px 17px; }
+    .chip { display: inline-flex; padding: 4px 8px; border-radius: 999px; color: white; background: var(--lake); font-family: var(--font-display); font-size: .64rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+    .story-card h3 { margin: 8px 0 5px; font-family: var(--font-display); font-size: 1.38rem; font-weight: 550; line-height: 1.08; }
+    .meta { color: var(--muted); font-size: .78rem; }
+    .circle-arrow { position: absolute; right: 16px; bottom: 18px; display: grid; width: 44px; height: 44px; place-items: center; border: 1.5px solid var(--ochre); border-radius: 50%; text-decoration: none; }
+    .dots { display: flex; justify-content: center; gap: 7px; padding: 10px 0 4px; }
+    .dot { width: 7px; height: 7px; border: 0; border-radius: 50%; background: #cbc9c4; }
+    .dot.is-active { background: var(--ochre); }
+    .impact { padding-top: 36px; padding-bottom: 38px; color: var(--white); background: var(--ink); }
+    .impact .eyebrow { color: #f0a34d; }
+    .impact__media { position: relative; margin-bottom: 20px; }
+    .impact__image { height: 232px; object-fit: cover; border-radius: var(--radius); }
+    .proof-grid { display: grid; grid-template-columns: 1fr; gap: 1px; overflow: hidden; margin: 22px 0 13px; border: 1px solid #3c3c37; border-radius: 9px; background: #3c3c37; }
+    .proof { display: grid; min-width: 0; grid-template-columns: 58px 1fr; align-items: start; gap: 12px; padding: 14px; background: #1b1b18; }
+    .proof strong { display: block; margin: 0; color: #f0a34d; font-family: var(--font-display); font-size: 1.45rem; font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+    .proof span { display: block; color: #dfddd6; font-size: .76rem; line-height: 1.4; }
+    .evidence-sources { margin-top: 12px; color: #aaa79f; font-size: .7rem; }
+    .evidence-sources summary { display: inline-flex; min-height: 38px; align-items: center; cursor: pointer; font-family: var(--font-display); font-weight: 550; text-decoration: underline; text-underline-offset: 4px; }
+    .evidence-sources p { margin: 4px 0 0; line-height: 1.5; }
+    .evidence-sources a { text-underline-offset: 3px; }
+
+    .partners { overflow: hidden; padding: 18px 0 20px; border-block: 1px solid var(--line); background: var(--paper); }
+    .partners > .eyebrow { margin-bottom: 15px; padding-inline: var(--gutter); text-align: center; }
+    .partner-marquee { overflow: hidden; color: var(--ink); -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+    .partner-track { display: flex; width: max-content; animation: partner-scroll 18s linear infinite; will-change: transform; }
+    .partner-set { display: flex; flex: none; align-items: center; gap: 38px; padding-right: 38px; }
+    .partner { display: inline-flex; flex: none; min-height: 38px; align-items: center; color: var(--ink); white-space: nowrap; }
+    .partner--ccfu { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; letter-spacing: .08em; }
+    .partner--ucoma { font-family: var(--font-reading); font-size: 1.35rem; font-weight: 700; letter-spacing: -.035em; }
+    .partner--museums { font-family: var(--font-display); font-size: 1rem; font-weight: 550; letter-spacing: -.045em; }
+    .partner--contexts { font-family: var(--font-reading); font-size: 1.22rem; font-weight: 650; letter-spacing: -.04em; }
+    @keyframes partner-scroll { to { transform: translateX(-50%); } }
+
+
+    .photo-essay { padding: 48px 0 52px; background: var(--white); }
+    .photo-essay__intro { max-width: 35rem; padding: 0 var(--gutter) 24px; }
+    .photo-essay__intro > p:not(.eyebrow) { color: var(--muted); }
+    .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; padding-inline: var(--gutter); }
+    .photo-grid figure { min-width: 0; margin: 0; }
+    .photo-grid figure:first-child, .photo-grid figure:nth-child(4), .photo-grid figure:nth-child(5) { grid-column: 1 / -1; }
+    .photo-grid button { position: relative; display: block; width: 100%; overflow: hidden; padding: 0; border: 0; border-radius: var(--radius); background: var(--ink); cursor: zoom-in; }
+    .photo-grid button::after { content: "+"; position: absolute; right: 10px; bottom: 10px; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.72); border-radius: 50%; color: white; background: rgba(17,17,15,.42); font-family: var(--font-display); font-size: 1.1rem; backdrop-filter: blur(5px); }
+    .photo-grid button:focus-visible { outline: 3px solid var(--ochre); outline-offset: 3px; }
+    .photo-grid img { height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .photo-grid button:hover img { transform: scale(1.025); }
+    .photo-grid figure:first-child button { aspect-ratio: 4 / 3; }
+    .photo-grid figure:nth-child(2) button, .photo-grid figure:nth-child(3) button { aspect-ratio: 3 / 4; }
+    .photo-grid figure:nth-child(2) img { object-position: 52% center; }
+    .photo-grid figure:nth-child(4) button { aspect-ratio: 16 / 10; }
+    .photo-grid figure:nth-child(5) button { aspect-ratio: 16 / 9; }
+    .photo-grid figcaption { padding: 9px 2px 14px; color: var(--muted); font-size: .76rem; line-height: 1.45; }
+    .lightbox { width: min(94vw, 760px); max-height: 92svh; padding: 0; border: 0; border-radius: 10px; color: white; background: var(--ink); box-shadow: 0 24px 80px rgba(0,0,0,.45); }
+    .lightbox::backdrop { background: rgba(17,17,15,.88); backdrop-filter: blur(4px); }
+    .lightbox__close { position: absolute; z-index: 2; top: 10px; right: 10px; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; color: white; background: rgba(17,17,15,.55); font-size: 1.45rem; cursor: pointer; }
+    .lightbox img { width: 100%; max-height: 76svh; object-fit: contain; background: #090908; }
+    .lightbox p { margin: 0; padding: 14px 18px 17px; color: #dfddd6; font-size: .85rem; }
+
+    .participation { padding-top: 46px; padding-bottom: 46px; background: var(--paper); }
+    .participation__intro { max-width: 32rem; margin-bottom: 24px; }
+    .participation__intro > p:not(.eyebrow) { color: var(--muted); }
+    .participation__image { position: relative; height: 250px; overflow: hidden; margin-bottom: 8px; border-radius: var(--radius) var(--radius) 0 0; }
+    .participation__image img { height: 100%; object-fit: cover; }
+    .participation__actions { display: grid; border-top: 1px solid #cfc8bc; }
+    .participation__actions > a {
+      display: grid; min-height: 104px; grid-template-columns: 1fr 42px; align-items: center; gap: 18px;
+      padding: 18px 4px; border-bottom: 1px solid #cfc8bc; color: var(--ink); text-decoration: none;
+    }
+    .participation__actions strong { display: block; margin-bottom: 5px; font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; }
+    .participation__actions small { display: block; max-width: 29rem; color: var(--muted); font-size: .88rem; line-height: 1.48; }
+    .participation__actions b { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--ochre); border-radius: 50%; color: var(--ochre-dark); font-family: var(--font-display); font-weight: 500; transition: color .18s ease, background .18s ease; }
+    .participation__actions > a:hover b, .participation__actions > a:focus-visible b { color: var(--white); background: var(--ochre); }
+
+    .signup { margin: 0; padding: 0 0 28px; border-bottom: 1px solid #373732; }
+    .signup h2 { color: var(--white); font-size: 1.75rem; }
+    .signup p { color: #b8b6af; }
+    .signup-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+    .signup-form input { width: 100%; min-height: 50px; padding: 10px 14px; border: 1px solid #aaa69f; border-radius: 7px; background: white; }
+    .signup-form input:focus { outline: 3px solid rgba(217,120,13,.24); border-color: var(--ochre); }
+    .signup-form .button { border: 0; }
+    .form-note { margin: 8px 0 0; color: var(--muted); font-size: .76rem; }
+
+    .footer { padding: 28px var(--gutter) max(24px, env(safe-area-inset-bottom)); color: white; background: var(--ink); }
+    .footer__brand { width: 170px; margin: 38px 0 30px; }
+    .footer__logo { width: 170px; margin: 0; filter: invert(1); }
+    .footer__descriptor { display: flex; width: 170px; justify-content: space-between; margin: 4px 0 0; color: #b8b6af; font-family: var(--font-display); font-size: .52rem; font-weight: 500; letter-spacing: .01em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+    .footer details { border-top: 1px solid #373732; }
+    .footer details:last-of-type { border-bottom: 1px solid #373732; }
+    .footer summary { display: flex; min-height: 50px; align-items: center; justify-content: space-between; padding: 12px 2px; cursor: pointer; font-family: var(--font-display); font-weight: 550; list-style: none; }
+    .footer summary::-webkit-details-marker { display: none; }
+    .footer summary::after { content: "+"; color: #aaa8a1; font-size: 1.25rem; font-weight: 400; }
+    .footer details[open] summary::after { content: "−"; }
+    .footer details a { display: block; padding: 8px 2px 12px; color: #cccac3; text-decoration: none; }
+    .footer__bottom { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; justify-content: space-between; padding-top: 24px; color: #c9c7c0; font-size: .78rem; }
+    .socials { display: flex; gap: 8px; }
+    .socials a { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid #4a4944; border-radius: 50%; text-decoration: none; }
+    .credits { margin: 0; padding: 4px 2px 14px; color: #9c9a93; font-size: .69rem; }
+    .credits a { color: #aaa8a1; }
+    .concept-label { display: none; }
+    .footer .signup { color: white; background: transparent; }
+    .footer .signup p { color: #c9c7c0; }
+    .footer .signup .eyebrow { color: #f0a34d; }
+    .toast {
+      position: fixed; z-index: 400; right: 18px; bottom: 18px; left: 18px;
+      max-width: 520px; margin-inline: auto; padding: 14px 18px; border-radius: 8px;
+      color: white; background: var(--lake); box-shadow: var(--shadow); transform: translateY(150%);
+      transition: transform .25s ease;
+    }
+    .toast.is-visible { transform: none; }
+
+    @media (min-width: 900px) and (pointer: fine) {
+      body { background: #deddd9; }
+      .site { width: min(100%, 780px); box-shadow: 0 0 50px rgba(17,17,15,.18); }
+      .reason { grid-template-columns: .9fr 1.1fr; align-items: center; }
+      .work-list { grid-column: 1 / -1; }
+      .impact { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+      .impact__media { height: 100%; min-height: 300px; margin: 0; }
+      .impact__image { height: 100%; min-height: 300px; }
+      .participation__image { height: 340px; }
+      .signup-form { grid-template-columns: 1fr auto; }
+      .signup-form .button { min-width: 148px; }
+    }
+
+    @media (min-width: 520px) {
+      .proof-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .proof { display: block; padding: 15px 12px; }
+      .proof strong { margin-bottom: 7px; font-size: 1.7rem; }
+    }
+
+    @media (max-width: 370px) {
+      .signup-form { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; animation-duration: .001ms !important; }
+      .partner-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+      .partner-track { animation: none !important; }
+      .partner-set[aria-hidden="true"] { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site">
+    <header class="header">
+      <a class="brand" href="#top" aria-label="Bugungu Heritage and Information Centre home"><img src="/assets/7732233b3dc43e88.png" alt="Bugungu"></a>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-drawer"><span class="hamburger" aria-hidden="true"></span></button>
+    </header>
+
+    <div class="scrim" data-close-menu></div>
+    <aside class="drawer" id="menu-drawer" aria-hidden="true">
+      <div class="drawer__top"><img class="drawer__logo" src="/assets/7732233b3dc43e88.png" alt="Bugungu"><button class="drawer__close" type="button" aria-label="Close menu" data-close-menu>&times;</button></div>
+      <nav aria-label="Primary navigation">
+        <a href="/about/">Our story</a><a href="/heritage/">Heritage</a><a href="/heritage/">Living heritage</a><a href="#work">Our work</a><a href="/visit/">Visit</a><a href="/about/#partners">Partners</a><a href="/contact/">Contact</a>
+      </nav>
+      <a class="button button--primary" href="/support/">Support BHIC</a>
+    </aside>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero__image">
+          <img src="/assets/5ac99fbb0ccd167c.webp" alt="A visitor smiles while reading a notebook in the BHIC library" fetchpriority="high">
+        </div>
+        <div class="hero__content">
+          <p class="eyebrow">Bugungu · Buliisa · Uganda</p>
+          <h1>Our future<br>should remember<br>our past.</h1>
+          <p>We record, teach and share Bugungu’s living heritage so it can guide the generations arriving next.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="/heritage/">See our heritage</a>
+            <a class="hero__secondary" href="/visit/">Visit us <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section partners" id="partners" aria-label="Selected collaborators">
+        <p class="eyebrow">Working alongside</p>
+        <div class="partner-marquee" aria-label="CCFU, UCOMA, TheMuseumsLab and Local Contexts">
+          <div class="partner-track">
+            <div class="partner-set">
+              <span class="partner partner--ccfu">CCFU</span><span class="partner partner--ucoma">UCOMA</span><span class="partner partner--museums">TheMuseumsLab</span><span class="partner partner--contexts">Local Contexts</span>
+            </div>
+            <div class="partner-set" aria-hidden="true">
+              <span class="partner partner--ccfu">CCFU</span><span class="partner partner--ucoma">UCOMA</span><span class="partner partner--museums">TheMuseumsLab</span><span class="partner partner--contexts">Local Contexts</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reason" id="story">
+        <div class="reason__intro">
+          <p class="eyebrow">Why BHIC exists</p>
+          <h2>Progress should not cost a people their memory.</h2>
+          <p>Roads, oil and opportunity are changing Buliisa. We make sure Bugungu knowledge, places and voices help shape what comes next.</p>
+        </div>
+        <figure class="reason__image"><img src="/assets/1f69baf799a27ca3.webp" alt="BHIC staff and community members exchange knowledge in conversation under a tree" loading="lazy"></figure>
+        <div class="work-list" id="work" aria-label="What BHIC does">
+          <article><span>01</span><div><h3>Record living memory</h3><p>We work with elders and knowledge holders to document stories, songs, place names, crafts and practices.</p></div></article>
+          <article><span>02</span><div><h3>Bring heritage into schools</h3><p>Heritage clubs help young people encounter local knowledge as something living, useful and their own.</p></div></article>
+          <article><span>03</span><div><h3>Care for the museum</h3><p>Objects, photographs and oral accounts become starting points for conversation between generations.</p></div></article>
+          <article><span>04</span><div><h3>Defend cultural rights</h3><p>Community knowledge helps Bugungu voices take part in decisions about land, culture and the future.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="museum">
+        <div class="section-head"><div><p class="eyebrow">From the museum</p><h2>Stories held in ordinary things.</h2><p>Explore the objects, voices and practices through which Bugungu remembers itself.</p></div></div>
+      </section>
+      <div class="carousel-shell">
+        <div class="carousel" id="museum-carousel" aria-label="Museum stories">
+          <article class="story-card"><img class="story-card__image" src="/assets/eb921072c8e4ae7b.webp" alt="A tall, hand-built fishing trap from the BHIC collection" loading="lazy"><div class="story-card__body"><span class="chip">Object story</span><h3>A fish trap, a record of water and skilled hands</h3><span class="meta">4 min read</span><a class="circle-arrow" href="/heritage/" aria-label="Read the fishing trap story">→</a></div></article>
+          <article class="story-card"><img class="story-card__image" src="/assets/69b2f756d4851191.webp" alt="A traditional drum beside a fire during a heritage activity" loading="lazy"><div class="story-card__body"><span class="chip">Living memory</span><h3>When a drum carries memory</h3><span class="meta">5 min read</span><a class="circle-arrow" href="/heritage/" aria-label="Read the oral history story">→</a></div></article>
+          <article class="story-card"><img class="story-card__image" src="/assets/d50b67dd15b9d400.webp" alt="Hands hold two objects during a museum interpretation" loading="lazy"><div class="story-card__body"><span class="chip">Heritage learning</span><h3>When skill passes from hand to hand</h3><span class="meta">4 min read</span><a class="circle-arrow" href="/heritage/" aria-label="Read the heritage learning story">→</a></div></article>
+          <article class="story-card"><img class="story-card__image" src="/assets/fae6aa2cce7de75f.webp" alt="Bugungu Heritage Troupe members gathered with traditional drums" loading="lazy"><div class="story-card__body"><span class="chip">Living heritage</span><h3>When memory moves through music</h3><span class="meta">3 min read</span><a class="circle-arrow" href="/heritage/" aria-label="Read the music story">→</a></div></article>
+        </div>
+        <div class="dots" aria-hidden="true"><span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+
+      <section class="section impact">
+        <figure class="impact__media"><img class="impact__image" src="/assets/595d33eedecba05b.webp" alt="A visitor studies the Mpeehu za Bugungu community map" loading="lazy"></figure>
+        <div><p class="eyebrow">Evidence of the work</p><h2>Heritage recorded—and returned to community life.</h2>
+          <div class="proof-grid" aria-label="Selected published evidence">
+            <div class="proof"><strong>2013</strong><span>Registered as a community-based heritage organisation.</span></div>
+            <div class="proof"><strong>2021</strong><span>58 young people joined the Hoima radio heritage competition through BHIC.</span></div>
+            <div class="proof"><strong>2022</strong><span>The community-led Mpeehu za Bugungu wind map was documented.</span></div>
+          </div>
+          <details class="evidence-sources"><summary>Published sources</summary><p>Evidence drawn from <a href="https://ucoma.or.ug/western-region/">UCOMA</a>, <a href="https://crossculturalfoundation.or.ug/cultural-heritage-club-activities-during-the-lockdown-a-radio-based-competition/">CCFU</a> and <a href="https://www.livingmaps.org/past-events/2025/4/24/more-than-human-mappings-livingmaps-network-conference-24-26th-april-2025">Livingmaps</a>.</p></details>
+        </div>
+      </section>
+
+
+      <section class="photo-essay" id="inside-bhic" aria-labelledby="inside-bhic-heading">
+        <div class="photo-essay__intro">
+          <p class="eyebrow">Inside BHIC</p>
+          <h2 id="inside-bhic-heading">A living archive, in living hands.</h2>
+          <p>Objects, songs, maps and memories come alive through the people who carry them.</p>
+        </div>
+        <div class="photo-grid">
+          <figure><button type="button" data-lightbox aria-label="View hands playing a traditional string instrument"><img src="/assets/a3aad42eb4de2607.webp" alt="Hands playing a traditional string instrument" loading="lazy"></button><figcaption>Music carries memory through hands, sound and practice.</figcaption></figure>
+          <figure><button type="button" data-lightbox aria-label="View a visitor holding a drum inside BHIC"><img src="/assets/141ba4b3d0fc793e.webp" alt="A smiling visitor holds a drum inside the BHIC library" loading="lazy"></button><figcaption>Encountering Bugungu through music and objects.</figcaption></figure>
+          <figure><button type="button" data-lightbox aria-label="View a visitor examining a woven object"><img src="/assets/a0b4f666093a1652.webp" alt="A visitor examines a woven object in the BHIC collection" loading="lazy"></button><figcaption>Looking closely turns an object into a conversation.</figcaption></figure>
+          <figure><button type="button" data-lightbox aria-label="View Kiiza Wilson sharing museum objects with a visitor"><img src="/assets/c236de1dd2be6872.webp" alt="Kiiza Wilson shares objects from the BHIC collection with a visitor" loading="lazy"></button><figcaption>Kiiza Wilson shares the collection through conversation.</figcaption></figure>
+          <figure><button type="button" data-lightbox aria-label="View visitors exploring Uganda's community museums map"><img src="/assets/957895d99ff4af37.webp" alt="Visitors locate Buliisa on Uganda's community museums map" loading="lazy"></button><figcaption>Placing Buliisa within Uganda’s wider community-museum story.</figcaption></figure>
+        </div>
+      </section>
+
+      <dialog class="lightbox" id="photo-lightbox" aria-label="Expanded photograph">
+        <button class="lightbox__close" type="button" aria-label="Close photograph">&times;</button>
+        <img src="" alt="">
+        <p></p>
+      </dialog>
+
+      <section class="section participation" id="visit" aria-labelledby="participation-heading">
+        <div class="participation__intro">
+          <p class="eyebrow">Your place in the story</p>
+          <h2 id="participation-heading">Come closer to Bugungu.</h2>
+          <p>Heritage stays alive when people encounter it, contribute what they know and help carry it forward.</p>
+        </div>
+        <figure class="participation__image"><img src="/assets/a466b7d6fea95847.webp" alt="Objects on display inside the Bugungu Heritage and Information Centre" loading="lazy"></figure>
+        <nav class="participation__actions" aria-label="Ways to take part">
+          <a href="/visit/"><span><strong>Visit us</strong><small>Meet Bugungu through its objects, places and people.</small></span><b aria-hidden="true">→</b></a>
+          <a id="stories" href="/contact/?reason=story"><span><strong>Share what you know</strong><small>Preserve a family memory, name, song or practice.</small></span><b aria-hidden="true">→</b></a>
+          <a id="support" href="/support/"><span><strong>Support the work</strong><small>Help another story reach the next generation.</small></span><b aria-hidden="true">→</b></a>
+        </nav>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <section class="signup"><p class="eyebrow">From Buliisa</p><h2>Stay close to the story.</h2><p>Occasional museum news, new stories and ways to take part.</p><form class="signup-form" id="signup-form"><label class="sr-only" for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="Email address" required><button class="button button--primary" type="submit">Sign me up</button></form><p class="form-note">No noise. Unsubscribe anytime. This prototype does not send or store your address.</p></section>
+      <div class="footer__brand">
+        <img class="footer__logo" src="/assets/7732233b3dc43e88.png" alt="Bugungu">
+        <p class="footer__descriptor"><span>Heritage</span><span>and</span><span>Information</span><span>Centre</span></p>
+      </div>
+      <details><summary>Visit</summary><a href="/visit/">Plan a visit</a><a href="/heritage/">Heritage</a></details><details><summary>Explore</summary><a href="/heritage/">Stories</a><a href="/heritage/">Collection</a><a href="#work">Our work</a></details><details><summary>About</summary><a href="/about/">About BHIC</a><a href="/about/#partners">Partners</a></details><details><summary>Get involved</summary><a href="/support/">Support BHIC</a><a href="/contact/?reason=story">Share a story</a></details>
+      <div class="footer__bottom"><span>● &nbsp;Buliisa, Uganda</span><div class="socials" aria-label="Social media placeholders"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="YouTube">▶</a></div><span>© BHIC &nbsp;·&nbsp; Privacy</span></div>
+      <details class="credit-disclosure" id="concept-note"><summary>Photography and evidence</summary><p class="credits">Photography was supplied by BHIC. Participant permission for website use has been confirmed by the client; individual photographer credits should be added before launch. Impact figures must be reconfirmed with BHIC before publication. Partner names remain typographic treatments pending approved logo assets.</p></details>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Thank you. Connect this form to BHIC’s mailing platform when the site is built.</div>
+  <script is:inline>
+
+    const lightbox = document.querySelector('#photo-lightbox');
+    const lightboxImage = lightbox.querySelector('img');
+    const lightboxCaption = lightbox.querySelector('p');
+    document.querySelectorAll('[data-lightbox]').forEach(button => button.addEventListener('click', () => {
+      const source = button.querySelector('img');
+      const caption = button.closest('figure').querySelector('figcaption');
+      lightboxImage.src = source.src;
+      lightboxImage.alt = source.alt;
+      lightboxCaption.textContent = caption.textContent;
+      lightbox.showModal();
+    }));
+    lightbox.querySelector('.lightbox__close').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
+
+    const menuButton = document.querySelector('.menu-button');
+    const drawer = document.querySelector('.drawer');
+    const scrim = document.querySelector('.scrim');
+    const setMenu = (open) => {
+      drawer.classList.toggle('is-open', open); scrim.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', String(!open)); menuButton.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) drawer.querySelector('.drawer__close').focus(); else menuButton.focus();
+    };
+    menuButton.addEventListener('click', () => setMenu(true));
+    document.querySelectorAll('[data-close-menu]').forEach(el => el.addEventListener('click', () => setMenu(false)));
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) setMenu(false); });
+
+    const museumCarousel = document.getElementById('museum-carousel');
+    const museumSlides = [...museumCarousel.children];
+    const museumDots = [...document.querySelectorAll('.carousel-shell .dot')];
+    let museumIndex = 0;
+    let museumTimer;
+
+    const showMuseumSlide = (index, smooth = true) => {
+      museumIndex = (index + museumSlides.length) % museumSlides.length;
+      museumCarousel.scrollTo({ left: museumSlides[museumIndex].offsetLeft - museumCarousel.offsetLeft, behavior: smooth ? 'smooth' : 'auto' });
+      museumDots.forEach((dot, i) => dot.classList.toggle('is-active', i === museumIndex));
+    };
+    const stopMuseumSlider = () => window.clearInterval(museumTimer);
+    const startMuseumSlider = () => {
+      stopMuseumSlider();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        museumTimer = window.setInterval(() => showMuseumSlide(museumIndex + 1), 4800);
+      }
+    };
+    const syncMuseumDots = () => {
+      const nearest = museumSlides.reduce((best, slide, i) => Math.abs(slide.offsetLeft - museumCarousel.scrollLeft) < Math.abs(museumSlides[best].offsetLeft - museumCarousel.scrollLeft) ? i : best, 0);
+      museumIndex = nearest;
+      museumDots.forEach((dot, i) => dot.classList.toggle('is-active', i === museumIndex));
+    };
+    let museumScrollTick;
+    museumCarousel.addEventListener('scroll', () => {
+      window.clearTimeout(museumScrollTick);
+      museumScrollTick = window.setTimeout(syncMuseumDots, 90);
+    }, { passive: true });
+    ['pointerdown', 'focusin', 'mouseenter'].forEach(event => museumCarousel.addEventListener(event, stopMuseumSlider));
+    ['pointerup', 'focusout', 'mouseleave'].forEach(event => museumCarousel.addEventListener(event, startMuseumSlider));
+    document.addEventListener('visibilitychange', () => document.hidden ? stopMuseumSlider() : startMuseumSlider());
+    startMuseumSlider();
+
+    const form = document.getElementById('signup-form');
+    const toast = document.getElementById('toast');
+    form.addEventListener('submit', e => {
+      e.preventDefault(); if (!form.reportValidity()) return;
+      toast.classList.add('is-visible'); form.reset();
+      window.setTimeout(() => toast.classList.remove('is-visible'), 4300);
+    });
+  </script>
+</body>
+</html>
